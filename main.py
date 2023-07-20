@@ -18,10 +18,10 @@ figures_layouts = [[(start_x, start_y), (start_x-1, start_y),
 key_pressed = ''
 
 field = []
-for y in range(-1, CELL_NUMB_Y+2):
+for y in range(-1, CELL_NUMB_Y+1):
     l = []
-    for x in range(-1, CELL_NUMB_X+2):
-        if -1 < x < CELL_NUMB_X+1 and -1 < y < CELL_NUMB_Y+1:
+    for x in range(-1, CELL_NUMB_X+1):
+        if -1 < x < CELL_NUMB_X and -1 < y < CELL_NUMB_Y:
             l.append(0)
         else:
             l.append(1)

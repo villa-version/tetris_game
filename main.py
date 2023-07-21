@@ -1,5 +1,5 @@
 import pygame, time
-from random import randint as rand
+from random import randint as random
 from copy import deepcopy
 
 
@@ -24,7 +24,7 @@ for y in range(-1, CELL_NUMB_Y+1):
         if -1 < x < CELL_NUMB_X and -1 < y < CELL_NUMB_Y:
             l.append(0)
         else:
-            l.append(1)
+            l.append(-1)
     field.append(l)
 
 field_copy = deepcopy(field)
@@ -55,8 +55,8 @@ def update():
     field_copy = deepcopy(field)
     draw_cells()
     update_figures()
-    for row in field:
-        print(row)
+    #for row in field:
+    #    print(row)
     update_field()
 
 
@@ -81,15 +81,15 @@ def update_figures():
             change_numb_state(rect)
     for figure in figures:
         for i in range(len(figure)):
-            if collide(figure[i].x, figure[i].y):
+            if collide(figure[i].x, figure[i].y) and figure[i].can_move:
                 for j in range(len(figure)):
                     figure[j].can_move = False
-                #create_figure(*figures_layouts[rand(0, len(figures_layouts)-1)])
+                create_figure(*figures_layouts[random(0, len(figures_layouts)-1)])
                 break
 
 
 def collide(rx, ry):
-    if field[ry+2][rx+1] == 1:
+    if field[ry+2][rx+1] == -1 or field[ry+2][rx+1] == 1:
         return True
     return False
 
@@ -107,13 +107,13 @@ def change_numb_state(obj):
         numb = 2
     else:
         numb = 1
-    field[obj.y+1][obj.x+1] = numb
+        field[obj.y+1][obj.x+1] = numb
 
 
 def main():
     global run_game, screen, figures, key_pressed, figures_layouts, field
 
-    create_figure(*figures_layouts[rand(0, len(figures))])
+    create_figure(*figures_layouts[random(0, len(figures_layouts)-1)])
 
     while run_game:
         for event in pygame.event.get():
